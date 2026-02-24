@@ -1,0 +1,4 @@
+https://www.uber.com/en-IN/blog/schemaless-part-one-mysql-datastore/
+https://www.uber.com/en-IN/blog/schemaless-part-two-architecture/
+https://www.uber.com/en-IN/blog/schemaless-part-three-datastore-triggers/
+https://www.uber.com/en-IN/blog/schemaless-sql-database/

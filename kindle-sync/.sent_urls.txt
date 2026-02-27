@@ -1,0 +1,3 @@
+https://www.uber.com/en-SG/blog/attribute-based-access-control-at-uber/
+https://www.uber.com/en-SG/blog/enhanced-agentic-rag
+https://www.uber.com/en-SG/blog/introducing-the-prompt-engineering-toolkit

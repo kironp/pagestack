@@ -27,6 +27,13 @@ classifiers = [
 
 [project.scripts]
 pagestack = "pagestack.main:main"
+pagestack-watch = "pagestack.auto:main"
+
+[dependency-groups]
+dev = [
+    "build>=1.2.1",
+    "twine>=5.1.1",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

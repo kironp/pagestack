@@ -3,9 +3,9 @@
 PageStack — Convert a list of URLs into a single EPUB file.
 
 Usage:
-    pagestack urls.txt
-    pagestack urls.txt my_reading_list.epub
-    pagestack urls.txt --title "My Articles" --author "Arpit"
+    pagestack kindle-sync/urls_to_be_exported.txt
+    pagestack kindle-sync/urls_to_be_exported.txt my_reading_list.epub
+    pagestack kindle-sync/urls_to_be_exported.txt --title "My Articles" --author "Arpit"
 
 The input file should have one URL per line. Lines starting with # are ignored.
 """
@@ -541,12 +541,17 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
-    parser.add_argument("urls_file", help="Path to text file with one URL per line")
+    parser.add_argument(
+        "urls_file",
+        nargs="?",
+        default="kindle-sync/urls_to_be_exported.txt",
+        help="Path to text file with one URL per line (default: kindle-sync/urls_to_be_exported.txt)",
+    )
     parser.add_argument(
         "output",
         nargs="?",
         default="",
-        help="Output EPUB filename (default: derived from title + date)",
+        help="Output EPUB filename (default: kindle-sync/epub/<title>.epub)",
     )
     parser.add_argument("--title", default="", help="Book title (default: auto-generated)")
     parser.add_argument("--author", default="PageStack", help="Author field in EPUB metadata")
@@ -564,7 +569,12 @@ def main():
     print(f"Found {len(urls)} URL(s) in {urls_file}")
 
     book_title = args.title or f"Web Articles — {datetime.now().strftime('%Y-%m-%d')}"
-    output_path = args.output or re.sub(r"[^\w\-.]", "_", book_title) + ".epub"
+    if args.output:
+        output_path = args.output
+    else:
+        output_dir = Path("kindle-sync") / "epub"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        output_path = str(output_dir / (re.sub(r"[^\w\-.]", "_", book_title) + ".epub"))
 
     print(f"Output : {output_path}")
     print(f"Title  : {book_title}")
